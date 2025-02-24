@@ -12,7 +12,7 @@ class Favourites extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
-        title: Text("Add Product"),
+        title: Text("Favourites"),
         backgroundColor: Colors.red,
       ),
       body: Center(

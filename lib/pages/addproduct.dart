@@ -49,7 +49,37 @@ class _AddProductState extends State<AddProduct> {
                 controller: _nameController,
                 decoration: InputDecoration(labelText: "Product Name"),
                 validator: (value)=>value!.isEmpty?"Enter product name":null,
-              )
+              ),
+              TextFormField(
+                controller: _priceController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(labelText: "Price"),
+                validator: (value)=>value!.isEmpty?"Enter price of Product":null,
+              ),
+              TextFormField(
+                controller: _descriptionController,
+                maxLines: 3,
+                decoration: InputDecoration(labelText: "Description"),
+                validator: (value)=>value!.isEmpty?"Enter description of Product":null,
+              ),
+              TextFormField(
+                controller: _contactNumberController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(labelText: "Contact Number"),
+                validator: (value)=>value!.isEmpty?"Enter your Contact Number":null,
+              ),
+              TextFormField(
+                controller: _contactDetailsController,
+                decoration: InputDecoration(labelText: "Contact Details"),
+                validator: (value)=>value!.isEmpty?"Enter your address":null,
+              ),
+              const SizedBox(height: 20,),
+              _image!=null?Image.file(_image!,height: 150,width: 150,fit:BoxFit.cover):Text("No image selected"),
+              ElevatedButton(onPressed: _pickImage, child: Text("Pick Product Image")),
+              SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(onPressed: _submitForm, child: Text("Submit"))
             ],
           ),
         ),
