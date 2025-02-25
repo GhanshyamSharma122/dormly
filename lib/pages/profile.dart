@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _loadProfileImage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? imagePath = prefs.getString('profile_image');
-    if (imagePath != null && File(imagePath).existsSync()) {
+    if (File(imagePath!).existsSync()) {
       setState(() {
         _profileImage = File(imagePath);
         _profileImagePath = imagePath;
@@ -58,59 +58,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _showImagePickerDialog() {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(20),
-        height: 150,
-        child: Column(
-          children: [
-            TextButton.icon(
-              onPressed: () {
-                Navigator.pop(context);
-                _pickImage(ImageSource.camera);
-              },
-              icon: const Icon(Icons.camera),
-              label: const Text("Take a Photo"),
+      builder:
+          (context) => Container(
+            padding: const EdgeInsets.all(20),
+            height: 150,
+            child: Column(
+              children: [
+                TextButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.camera);
+                  },
+                  icon: const Icon(Icons.camera),
+                  label: const Text("Take a Photo"),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.gallery);
+                  },
+                  icon: const Icon(Icons.photo_library),
+                  label: const Text("Choose from Gallery"),
+                ),
+              ],
             ),
-            TextButton.icon(
-              onPressed: () {
-                Navigator.pop(context);
-                _pickImage(ImageSource.gallery);
-              },
-              icon: const Icon(Icons.photo_library),
-              label: const Text("Choose from Gallery"),
-            ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(
           "Profile",
-          style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
         ),
-        iconTheme: IconThemeData(color: Theme.of(context).colorScheme.onBackground),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
           children: [
-            ProfilePic(
-              image: _profileImage,
-              onTap: _showImagePickerDialog,
-            ),
+            ProfilePic(image: _profileImage, onTap: _showImagePickerDialog),
             const SizedBox(height: 20),
-            ProfileMenu(
-              text: "My Account",
-              icon: Icons.person,
-              press: () {},
-            ),
+            ProfileMenu(text: "My Account", icon: Icons.person, press: () {}),
             ProfileMenu(
               text: "Notifications",
               icon: Icons.notifications,
@@ -132,7 +128,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               press: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const HelpCenterPage()),
+                  MaterialPageRoute(
+                    builder: (context) => const HelpCenterPage(),
+                  ),
                 );
               },
             ),
@@ -143,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
-                      (route) => false,
+                  (route) => false,
                 );
               },
             ),
@@ -172,12 +170,17 @@ class ProfilePic extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             ClipOval(
-              child: image != null
-                  ? Image.file(image!, fit: BoxFit.cover)
-                  : Container(
-                color: Colors.grey[300],
-                child: const Icon(Icons.account_circle, size: 120, color: Colors.grey),
-              ),
+              child:
+                  image != null
+                      ? Image.file(image!, fit: BoxFit.cover)
+                      : Container(
+                        color: Colors.grey[300],
+                        child: const Icon(
+                          Icons.account_circle,
+                          size: 120,
+                          color: Colors.grey,
+                        ),
+                      ),
             ),
             Positioned(
               bottom: 5,
@@ -185,7 +188,11 @@ class ProfilePic extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 radius: 15,
-                child: const Icon(Icons.camera_alt, size: 18, color: Colors.white),
+                child: const Icon(
+                  Icons.camera_alt,
+                  size: 18,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
@@ -201,7 +208,12 @@ class ProfileMenu extends StatelessWidget {
   final IconData icon;
   final VoidCallback press;
 
-  const ProfileMenu({super.key, required this.text, required this.icon, required this.press});
+  const ProfileMenu({
+    super.key,
+    required this.text,
+    required this.icon,
+    required this.press,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -210,21 +222,33 @@ class ProfileMenu extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(
           padding: const EdgeInsets.all(20),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
           backgroundColor: Theme.of(context).colorScheme.surface,
         ),
         onPressed: press,
         child: Row(
           children: [
-            Icon(icon, color: Theme.of(context).colorScheme.onSurface, size: 22),
+            Icon(
+              icon,
+              color: Theme.of(context).colorScheme.onSurface,
+              size: 22,
+            ),
             const SizedBox(width: 20),
             Expanded(
               child: Text(
                 text,
-                style: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
             ),
-            Icon(Icons.arrow_forward_ios, size: 18, color: Theme.of(context).colorScheme.onSurface),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 18,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
           ],
         ),
       ),

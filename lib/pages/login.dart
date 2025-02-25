@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
 import 'signup.dart';
-import 'home.dart'; // Import Home Page
+// Import Home Page
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -10,10 +10,14 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9), // White background
-      body: SingleChildScrollView( // Prevents overflow
+      body: SingleChildScrollView(
+        // Prevents overflow
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 60.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 30.0,
+              vertical: 60.0,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,10 +47,14 @@ class LoginPage extends StatelessWidget {
                 TextField(
                   decoration: InputDecoration(
                     labelText: "Email",
-                    floatingLabelBehavior: FloatingLabelBehavior.never, // Disables floating animation
+                    floatingLabelBehavior:
+                        FloatingLabelBehavior
+                            .never, // Disables floating animation
                     prefixIcon: const Icon(Icons.email, color: Colors.black54),
                     filled: true,
-                    fillColor: const Color(0xFFDADADA), // Greyish white background
+                    fillColor: const Color(
+                      0xFFDADADA,
+                    ), // Greyish white background
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
@@ -60,7 +68,9 @@ class LoginPage extends StatelessWidget {
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: "Password",
-                    floatingLabelBehavior: FloatingLabelBehavior.never, // Disables floating animation
+                    floatingLabelBehavior:
+                        FloatingLabelBehavior
+                            .never, // Disables floating animation
                     prefixIcon: const Icon(Icons.lock, color: Colors.black54),
                     filled: true,
                     fillColor: const Color(0xFFDADADA),
@@ -101,7 +111,9 @@ class LoginPage extends StatelessWidget {
                       // Navigate to Home Page (without authentication)
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const MainScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => const MainScreen(),
+                        ),
                       );
                     },
                     child: const Text(
@@ -124,7 +136,9 @@ class LoginPage extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const SignUpPage()), // Navigate to SignUpPage
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ), // Navigate to SignUpPage
                       );
                     },
                     child: const Text(
@@ -136,7 +150,6 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

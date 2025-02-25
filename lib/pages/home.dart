@@ -1,3 +1,4 @@
+import 'package:dormly/pages/search.dart';
 import 'package:dormly/pages/ui/grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
@@ -9,6 +10,7 @@ class Home extends StatefulWidget {
 
 class HomePageScreen extends State<Home> {
   String selectedLocation = "BMSCE-IH";
+
   final List<String> location = [
     "BMSCE-IH",
     "BMSCE-NH2",
@@ -36,122 +38,185 @@ class HomePageScreen extends State<Home> {
     ],
   };
 
-  final List<String> carouselImages = [
-    'assets/pic.png',
-    'assets/pic.png',
-    'assets/pic.png',
-    'assets/pic.png',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        backgroundColor: Colors.orange,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(width: 20),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: DropdownButton<String>(
-                value:
-                    location.contains(selectedLocation)
-                        ? selectedLocation
-                        : null,
-                hint: Text("Select Location"),
-                dropdownColor: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
+            Row(
+              children: [
+                SizedBox(width: 4),
+                Container(
+                  height: 35,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.black, width: 1.5),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: selectedLocation,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedLocation = newValue!;
+                        });
+                      },
+                      icon: Icon(Icons.arrow_drop_down, color: Colors.black),
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                      items: location.map<DropdownMenuItem<String>>((String loc) {
+                        return DropdownMenuItem<String>(
+                          value: loc,
+                          child: Text(loc),
+                        );
+                      }).toList(),
+                    ),
+                  ),
                 ),
-                items:
-                    location.map((String location) {
-                      return DropdownMenuItem<String>(
-                        value: location,
-                        child: Text(location, style: TextStyle(fontSize: 16)),
-                      );
-                    }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedLocation = newValue ?? selectedLocation;
-                  });
-                },
-              ),
+                Spacer(),
+              ],
             ),
           ],
         ),
-        backgroundColor: Colors.red,
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 200,
-              child: CarouselSlider.builder(
-                unlimitedMode: true,
-                autoSliderTransitionTime: Duration(milliseconds: 800),
-                autoSliderDelay: Duration(seconds: 3),
-                slideBuilder: (index) {
-                  return Image.asset(carouselImages[index], fit: BoxFit.cover);
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchPage(items: categorizedItems.values.expand((x) => x).toList()),
+                    ),
+                  );
                 },
-                itemCount: carouselImages.length,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                  child: Row(
+                    children: [
+                      Icon(Icons.search, color: Colors.grey),
+                      SizedBox(width: 10),
+                      Text(
+                        "Search for items...",
+                        style: TextStyle(color: Colors.grey, fontSize: 16),
+                      ),
+                      SizedBox(width: 20,),
+                    ],
+                  ),
+                ),
               ),
             ),
 
-            // Displaying categorized sliders
-            for (var category in categorizedItems.keys) ...[
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Container(
+                height: 180, // Adjust height as needed
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 6,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
-                child: Text(
-                  category,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: CarouselSlider.builder(
+                    enableAutoSlider: true, // Auto-swiping enabled
+                    autoSliderDelay: Duration(seconds: 3), // Swipe every 3 sec
+                    unlimitedMode: true, // Infinite looping
+                    slideIndicator: CircularSlideIndicator(
+                      padding: EdgeInsets.only(bottom: 10),
+                      indicatorBackgroundColor: Colors.grey,
+                      currentIndicatorColor: Colors.blue,
+                    ),
+                    itemCount: 3, // Change as per your image count
+                    slideBuilder: (index) {
+                      List<String> images = [
+                        "assets/pic.png",
+                        "assets/pic.png",
+                        "assets/pic.png",
+                      ];
+                      return Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(images[index]),
+                            fit: BoxFit.cover, // Full image fit
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 150,
-                child: CarouselSlider.builder(
-                  unlimitedMode: true,
-                  slideBuilder: (index) {
-                    var item = categorizedItems[category]![index];
-                    return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black26, blurRadius: 4),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(item['image'], height: 60),
-                          SizedBox(height: 5),
-                          Text(item['name'], style: TextStyle(fontSize: 16)),
-                          Text(
-                            item['price'],
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red,
+            ),
+
+
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: categorizedItems.entries.map((category) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          category.key,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        SizedBox(
+                          height: 212,
+                          child: CarouselSlider.builder(
+                            enableAutoSlider: false,
+                            unlimitedMode: false,
+                            itemCount: category.value.length,
+                            slideBuilder: (index) {
+                              final item = category.value[index];
+                              return SizedBox(
+                                height: 180,
+                                child: GridOfItems(filteredItems: category.value),
+                              );
+                            },
+                            slideIndicator: CircularSlideIndicator(
+                              padding: EdgeInsets.only(bottom: 10),
+                              indicatorBackgroundColor: Colors.grey,
+                              currentIndicatorColor: Colors.blue,
+                              indicatorRadius: 3,
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  },
-                  itemCount: categorizedItems[category]!.length,
-                ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
               ),
-            ],
+            ),
           ],
         ),
       ),
