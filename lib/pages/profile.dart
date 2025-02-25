@@ -24,27 +24,27 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ProfileMenu(
               text: "My Account",
-              icon: "assets/icons/User Icon.svg",
+              icon: Icons.person,
               press: () {},
             ),
             ProfileMenu(
               text: "Notifications",
-              icon: "assets/icons/Bell.svg",
+              icon: Icons.notifications,
               press: () {},
             ),
             ProfileMenu(
               text: "Settings",
-              icon: "assets/icons/Settings.svg",
+              icon: Icons.settings,
               press: () {},
             ),
             ProfileMenu(
               text: "Help Center",
-              icon: "assets/icons/Question mark.svg",
+              icon: Icons.question_mark,
               press: () {},
             ),
             ProfileMenu(
               text: "Log Out",
-              icon: "assets/icons/Log out.svg",
+              icon: Icons.logout,
               press: () {
                 Navigator.pushAndRemoveUntil(
                   context,
@@ -83,7 +83,8 @@ class ProfilePic extends StatelessWidget {
 }
 
 class ProfileMenu extends StatelessWidget {
-  final String text, icon;
+  final String text;
+  final dynamic icon;
   final VoidCallback press;
 
   const ProfileMenu({
@@ -108,11 +109,7 @@ class ProfileMenu extends StatelessWidget {
         onPressed: press,
         child: Row(
           children: [
-            SvgPicture.asset(
-              icon,
-              colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
-              width: 22,
-            ),
+            Icon(icon),
             const SizedBox(width: 20),
             Expanded(child: Text(text)),
             const Icon(Icons.arrow_forward_ios),

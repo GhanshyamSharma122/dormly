@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
-// Import Home Page
+import 'signup.dart';
+import 'home.dart'; // Import Home Page
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -117,9 +118,15 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Sign Up Link
+                // Sign Up Link
                 Center(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SignUpPage()), // Navigate to SignUpPage
+                      );
+                    },
                     child: const Text(
                       "Don't have an account? Sign Up",
                       style: TextStyle(
@@ -129,6 +136,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
               ],
             ),
           ),
