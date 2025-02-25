@@ -191,7 +191,7 @@ class HomePageScreen extends State<Home> {
                         ),
                         SizedBox(height: 5),
                         SizedBox(
-                          height: 212,
+                          height: 250,
                           child: CarouselSlider.builder(
                             enableAutoSlider: false,
                             unlimitedMode: false,
