@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/addproduct.dart';
 import 'pages/profile.dart';
 import 'pages/home.dart';
 import 'pages/favourites.dart';
 import 'pages/settings.dart'; // Added Settings Page
 import 'pages/theme_provider.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,10 +27,10 @@ class MainApp extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return MaterialApp(
-      title: '',
+      title: 'Dormly',
       themeMode: themeProvider.themeMode,
-      theme: ThemeData.light().copyWith(primaryColor: Colors.red),
-      darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.red),
+      theme: ThemeData.light().copyWith(primaryColor: Colors.orange),
+      darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.orange),
       debugShowCheckedModeBanner: false,
       home: const MainScreen(),
     );
@@ -69,10 +71,7 @@ class _MainScreenState extends State<MainScreen> {
         unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: "Favourites",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Favourites"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
@@ -83,6 +82,7 @@ class _MainScreenState extends State<MainScreen> {
             MaterialPageRoute(builder: (context) => AddProduct()),
           );
         },
+        backgroundColor: Colors.orange,
         child: const Icon(Icons.add),
       ),
     );
