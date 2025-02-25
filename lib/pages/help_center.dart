@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'faq_page.dart';
+import 'contact_support.dart';
+import 'about_page.dart';
 
 class HelpCenterPage extends StatelessWidget {
   const HelpCenterPage({super.key});
@@ -17,7 +20,11 @@ class HelpCenterPage extends StatelessWidget {
             title: const Text("About Dormly"),
             subtitle: const Text("Learn more about Dormly and its features."),
             onTap: () {
-              // Navigate to About section
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutPage()),
+              );
+
             },
           ),
           ListTile(
@@ -25,7 +32,11 @@ class HelpCenterPage extends StatelessWidget {
             title: const Text("FAQs"),
             subtitle: const Text("Frequently asked questions and answers."),
             onTap: () {
-              // Navigate to FAQs
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FAQPage()),
+              );
+
             },
           ),
           ListTile(
@@ -33,7 +44,9 @@ class HelpCenterPage extends StatelessWidget {
             title: const Text("Contact Support"),
             subtitle: const Text("Reach out to our support team."),
             onTap: () {
-              // Implement contact support functionality
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ContactSupportPage()),);
             },
           ),
         ],

@@ -41,6 +41,7 @@ class LoginPage extends StatelessWidget {
 
                 // Email Field
                 TextField(
+                  style: TextStyle(color: Colors.black,fontSize: 20),
                   decoration: InputDecoration(
                     labelText: "Email",
                     floatingLabelBehavior: FloatingLabelBehavior.never, // Disables floating animation
@@ -58,6 +59,7 @@ class LoginPage extends StatelessWidget {
                 // Password Field
                 TextField(
                   obscureText: true,
+                  style: TextStyle(color: Colors.black,fontSize: 20),
                   decoration: InputDecoration(
                     labelText: "Password",
                     floatingLabelBehavior: FloatingLabelBehavior.never, // Disables floating animation

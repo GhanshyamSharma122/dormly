@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key, required this.filteredItems});
 
-  final List<Map<String, dynamic>> filteredItems;
 
   @override
   HomePageScreen createState() => HomePageScreen();
@@ -90,7 +88,7 @@ class HomePageScreen extends State<Home> {
             ),
           ],
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.orange,
       ),
       body: Column(
         children: [

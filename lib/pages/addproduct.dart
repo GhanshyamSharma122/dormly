@@ -7,7 +7,7 @@ class AddProduct extends StatelessWidget {
     return Scaffold(
       appBar:AppBar(
         title: Text("Add Product"),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.orange,
       ),
       body: Center(
         child: Text("ram ram satya hai"),

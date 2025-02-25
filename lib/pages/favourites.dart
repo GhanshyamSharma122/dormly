@@ -13,7 +13,7 @@ class Favourites extends StatelessWidget {
     return Scaffold(
       appBar:AppBar(
         title: Text("Add Product"),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.orange,
       ),
       body: Center(
         child:GridOfItems(filteredItems: ArrayName),

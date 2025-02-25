@@ -28,10 +28,10 @@ class MainApp extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return MaterialApp(
-      title: 'Food Delivery',
+      title: 'Dormly',
       themeMode: themeProvider.themeMode,
-      theme: ThemeData.light().copyWith(primaryColor: Colors.red),
-      darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.red),
+      theme: ThemeData.light().copyWith(primaryColor: Colors.orange),
+      darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.orange),
       debugShowCheckedModeBanner: false,
       home: const MainScreen(),
     );
@@ -83,6 +83,7 @@ class _MainScreenState extends State<MainScreen> {
             MaterialPageRoute(builder: (context) => AddProduct()),
           );
         },
+        backgroundColor: Colors.orange,
         child: const Icon(Icons.add),
       ),
     );
