@@ -21,7 +21,7 @@ class GridOfItems extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-              child: Image.asset(
+              child: Image.network(
                 filteredItems[index]["image"]!,
                 fit: BoxFit.cover,
                 height: 130,

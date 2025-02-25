@@ -12,8 +12,8 @@ class Favourites extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
-        title: Text("Add Product"),
-        backgroundColor: Colors.orange,
+        title: Text("Favourites"),
+        backgroundColor: Colors.red,
       ),
       body: Center(
         child:GridOfItems(filteredItems: ArrayName),

@@ -6,7 +6,6 @@ import 'pages/profile.dart';
 import 'pages/home.dart';
 import 'pages/favourites.dart';
 import 'pages/settings.dart'; // Added Settings Page
-import 'package:provider/provider.dart';
 import 'pages/theme_provider.dart';
 
 
